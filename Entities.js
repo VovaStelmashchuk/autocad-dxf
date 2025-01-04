@@ -672,6 +672,9 @@ const Entities = class {
 			json.etype = value;			
 			json.line_type = "ByLayer";
 			json.color = "ByLayer";
+      if (value == "LINE") {
+        json.subclass = "AcDbLine";
+      }
 		} else if (code == "1") {					
 			if (json.subclass == "AcDbText" || json.subclass == "AcDbMText") {
 				const regex = /(\\P|\\L|\{|\}|\\*\\*a\d+;|\\H\d+\.?\d*x;|\+\/\-|%%u|\\Fromanc\||\\f.*p\d+;|t\d+;|c\d+;|\\fFutura Md BT\||\\Fsimplex\||\\fitalic.*c.*\d+;|scale.*\d+:\d+)/gim;
@@ -1878,6 +1881,10 @@ const Entities = class {
 					this.getEntities(array, COUNT + 4);
 					return;
 				} 
+        if (code2 == "2" && value2 == "ENTITIES") {
+					this.getEntities(array, COUNT + 4);
+          return;
+        }
 			}
 			COUNT = COUNT + 2;
 		}
